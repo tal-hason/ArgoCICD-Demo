@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.application.namespace }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "../src/app.js") . | sha256sum }}
+spec:
+  destination:
+    namespace: {{ .Values.destination.namespace }}
+    server: {{ .Values.server.namespace }}
+  project: {{ .Values.server.project }}
+  source:
+    path: {{ .Values.server.source.path }}
+    repoURL: {{ .Values.server.source.repoURL }}
+    targetRevision: {{ .Values.server.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: {{ .Values.server.syncPolicy.automated.prune }}
+      selfHeal: {{ .Values.server.syncPolicy.automated.selfHeal }}
+    syncOptions:
+      - CreateNamespace=true
