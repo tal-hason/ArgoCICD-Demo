@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: git-clone-
+spec:
+  template:
+    spec:
+      containers:
+      - name: git-init
+        env:
+          - name: GIT
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: git
+        image: registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8:v1.8.0-81
+        workingDir: /workspace/output
+        command: ["/bin/bash"]
+        arg: 
+          - rm -rf . 
+          - git clone $GIT 
+          - pwd 
+          - ls -l 
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace/output
+      restartPolicy: Never
+      volumes:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: workspace

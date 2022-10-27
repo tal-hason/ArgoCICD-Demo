@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: build-and-push-
+spec:
+  template:
+    spec:
+      containers:
+      - name: buildah
+        env:
+          - name: IMAGE
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: imagename
+          - name: TAG
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: imagetag
+        image: registry.redhat.io/rhel8/buildah:latest
+        workingDir: /workspace/output
+        command: ["/bin/bash"]
+        arg: 
+          - buildah bud -t $IMAGE:$TAG app/src/ContainerFile
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace/output
+        - name: var
+          mountPath: /var/lib/containers
+      restartPolicy: Never
+      securityContext:
+        seLinuxOptions:
+          level: 's0:c27,c14'
+        fsGroup: 1000730000
+      volumes:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: workspace
+        - name: var
+          emptyDir: {}
