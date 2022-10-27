@@ -1,0 +1,269 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: build-on9a20-buildah-pod
+  namespace: test
+spec:
+  containers:
+      name: step-build-and-push
+      command:
+        - /tekton/bin/entrypoint
+      env:
+        - name: SSL_CERT_DIR
+          value: >-
+            /tekton-custom-certs:/etc/ssl/certs:/etc/pki/tls/certs:/system/etc/security/cacerts
+      securityContext:
+        capabilities:
+          add:
+            - SETFCAP
+          drop:
+            - MKNOD
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - name: varlibcontainers
+          mountPath: /var/lib/containers
+        - name: ws-c8kbh
+          mountPath: /workspace/source
+        - name: tekton-internal-scripts
+          readOnly: true
+          mountPath: /tekton/scripts
+        - name: tekton-internal-downward
+          readOnly: true
+          mountPath: /tekton/downward
+        - name: tekton-creds-init-home-0
+          mountPath: /tekton/creds
+        - name: tekton-internal-run-0
+          mountPath: /tekton/run/0
+        - name: tekton-internal-bin
+          readOnly: true
+          mountPath: /tekton/bin
+        - name: tekton-internal-workspace
+          mountPath: /workspace
+        - name: tekton-internal-home
+          mountPath: /tekton/home
+        - name: tekton-internal-results
+          mountPath: /tekton/results
+        - name: tekton-internal-steps
+          readOnly: true
+          mountPath: /tekton/steps
+        - name: tekton-internal-secret-volume-pipeline-dockercfg-dzt2k-mkzgt
+          mountPath: /tekton/creds-secrets/pipeline-dockercfg-dzt2k
+        - name: tekton-internal-secret-volume-quay-io-97xdl
+          mountPath: /tekton/creds-secrets/quay.io
+        - name: kube-api-access-xcmpf
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        - name: config-trusted-cabundle-volume
+          readOnly: true
+          mountPath: /tekton-custom-certs/ca-bundle.crt
+          subPath: ca-bundle.crt
+        - name: config-service-cabundle-volume
+          readOnly: true
+          mountPath: /tekton-custom-certs/service-ca.crt
+          subPath: service-ca.crt
+      terminationMessagePolicy: File
+      image: >-
+        registry.redhat.io/rhel8/buildah@sha256:0a86ecbdfbe86e9d225b7fe4b090a0dd6d323f8afdfdf2bd933ff223ddb53320
+      workingDir: /workspace/source
+      args:
+        - '-wait_file'
+        - /tekton/downward/ready
+        - '-wait_file_content'
+        - '-post_file'
+        - /tekton/run/0/out
+        - '-termination_path'
+        - /tekton/termination
+        - '-step_metadata_dir'
+        - /tekton/run/0/status
+        - '-docker-cfg=pipeline-dockercfg-dzt2k'
+        - '-docker-config=quay.io'
+        - '-results'
+        - IMAGE_DIGEST
+        - '-entrypoint'
+        - /tekton/scripts/script-0-6lvp5
+        - '--'
+  serviceAccount: pipeline
+  volumes:
+    - name: tekton-internal-workspace
+      emptyDir: {}
+    - name: tekton-internal-home
+      emptyDir: {}
+    - name: tekton-internal-results
+      emptyDir: {}
+    - name: tekton-internal-steps
+      emptyDir: {}
+    - name: tekton-internal-secret-volume-pipeline-dockercfg-dzt2k-mkzgt
+      secret:
+        secretName: pipeline-dockercfg-dzt2k
+        defaultMode: 420
+    - name: tekton-internal-secret-volume-quay-io-97xdl
+      secret:
+        secretName: quay.io
+        defaultMode: 420
+    - name: tekton-internal-scripts
+      emptyDir: {}
+    - name: tekton-internal-bin
+      emptyDir: {}
+    - name: tekton-internal-downward
+      downwardAPI:
+        items:
+          - path: ready
+            fieldRef:
+              apiVersion: v1
+              fieldPath: 'metadata.annotations[''tekton.dev/ready'']'
+        defaultMode: 420
+    - name: tekton-creds-init-home-0
+      emptyDir:
+        medium: Memory
+    - name: tekton-internal-run-0
+      emptyDir: {}
+    - name: varlibcontainers
+      emptyDir: {}
+    - name: ws-c8kbh
+      emptyDir: {}
+    - name: kube-api-access-xcmpf
+      projected:
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+                - key: ca.crt
+                  path: ca.crt
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+          - configMap:
+              name: openshift-service-ca.crt
+              items:
+                - key: service-ca.crt
+                  path: service-ca.crt
+        defaultMode: 420
+    - name: config-trusted-cabundle-volume
+      configMap:
+        name: config-trusted-cabundle
+        items:
+          - key: ca-bundle.crt
+            path: ca-bundle.crt
+        defaultMode: 420
+    - name: config-service-cabundle-volume
+      configMap:
+        name: config-service-cabundle
+        items:
+          - key: service-ca.crt
+            path: service-ca.crt
+        defaultMode: 420
+  dnsPolicy: ClusterFirst
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+status:
+  containerStatuses:
+    - restartCount: 0
+      started: false
+      ready: false
+      name: step-build-and-push
+      state:
+        terminated:
+          exitCode: 125
+          reason: Error
+          message: '[{"key":"StartedAt","value":"2022-10-27T12:10:04.209Z","type":3}]'
+          startedAt: '2022-10-27T12:10:02Z'
+          finishedAt: '2022-10-27T12:10:53Z'
+          containerID: >-
+            cri-o://6d9ce0f75df266ab6ff1265232bdb16268e33948b8f3a28748b6a7d814b6e4aa
+      imageID: >-
+        registry.redhat.io/rhel8/buildah@sha256:0a86ecbdfbe86e9d225b7fe4b090a0dd6d323f8afdfdf2bd933ff223ddb53320
+      image: >-
+        registry.redhat.io/rhel8/buildah@sha256:0a86ecbdfbe86e9d225b7fe4b090a0dd6d323f8afdfdf2bd933ff223ddb53320
+      lastState: {}
+      containerID: 'cri-o://6d9ce0f75df266ab6ff1265232bdb16268e33948b8f3a28748b6a7d814b6e4aa'
+  qosClass: BestEffort
+  podIPs:
+    - ip: 10.217.1.1
+  podIP: 10.217.1.1
+  hostIP: 192.168.126.11
+  startTime: '2022-10-27T12:09:04Z'
+  initContainerStatuses:
+    - name: prepare
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2022-10-27T12:09:15Z'
+          finishedAt: '2022-10-27T12:09:15Z'
+          containerID: >-
+            cri-o://5534ce83ff922094d383b9f2df68e52be16f0ad3edc6c4d56ce93b5dbcf597dc
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: >-
+        registry.redhat.io/openshift-pipelines/pipelines-entrypoint-rhel8@sha256:5351b0d07e615643a1363b3c72949d1155bb75cd04b06072853dc07f46771444
+      imageID: >-
+        registry.redhat.io/openshift-pipelines/pipelines-entrypoint-rhel8@sha256:5351b0d07e615643a1363b3c72949d1155bb75cd04b06072853dc07f46771444
+      containerID: 'cri-o://5534ce83ff922094d383b9f2df68e52be16f0ad3edc6c4d56ce93b5dbcf597dc'
+    - name: place-scripts
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2022-10-27T12:09:24Z'
+          finishedAt: '2022-10-27T12:09:24Z'
+          containerID: >-
+            cri-o://8e98da701ee04ed83cda4cbdfd76eacde8a769a67ac121c9b81eceb879713ab0
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: >-
+        registry.redhat.io/ubi8/ubi-minimal@sha256:c7b45019f4db32e536e69e102c4028b66bf5cde173cfff4ffd3281ccf7bb3863
+      imageID: >-
+        registry.redhat.io/ubi8/ubi-minimal@sha256:2c8e091b26cc5a73cc7c61f4baee718021cfe5bd2fbc556d1411499c9a99ccdb
+      containerID: 'cri-o://8e98da701ee04ed83cda4cbdfd76eacde8a769a67ac121c9b81eceb879713ab0'
+    - name: working-dir-initializer
+      state:
+        terminated:
+          exitCode: 0
+          reason: Completed
+          startedAt: '2022-10-27T12:09:37Z'
+          finishedAt: '2022-10-27T12:09:37Z'
+          containerID: >-
+            cri-o://4032b3186dbbd709605b9b2542840d42fb7cbf47f00cba3c4e3832fab3990dae
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: >-
+        registry.redhat.io/openshift-pipelines/pipelines-workingdirinit-rhel8@sha256:5de69767a075286e331a5d710124c6c61014f54fd34aa5578258e6b16b2572cc
+      imageID: >-
+        registry.redhat.io/openshift-pipelines/pipelines-workingdirinit-rhel8@sha256:494b948b6f0b738413a88042fd22fe55ed28a64244ddced3c37ff831a8c7204e
+      containerID: 'cri-o://4032b3186dbbd709605b9b2542840d42fb7cbf47f00cba3c4e3832fab3990dae'
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-27T12:09:38Z'
+    - type: Ready
+      status: 'False'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-27T12:10:53Z'
+      reason: PodFailed
+    - type: ContainersReady
+      status: 'False'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-27T12:10:53Z'
+      reason: PodFailed
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2022-10-27T12:09:04Z'
+  phase: Failed
