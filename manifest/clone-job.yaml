@@ -13,6 +13,8 @@ spec:
               configMapKeyRef:
                 name: ci-cd-details
                 key: git
+          - name: WORKENV
+            value: /workspace/output
         image: registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8:v1.8.0-81
         workingDir: /workspace/output
         command: ["/bin/bash"]

@@ -1,0 +1,24 @@
+FROM docker.io/fedora:36
+
+# Create app directory
+WORKDIR /tmp
+
+USER root
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY sh/* .
+
+
+# update the base image
+RUN dnf install git -y
+# If you are building your code for production
+# RUN npm ci --only=production
+
+
+USER 1001
+
+ENV WORKENV=/workspace/output
+ENV GIT='https://github.com/RedHatTraining/DO101-apps.git'
+
+CMD [ "git-clone.sh" ]
