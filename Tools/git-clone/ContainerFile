@@ -7,6 +7,9 @@ USER root
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
+RUN mkdir -p /workspace/output
+RUN chown 1001:1001 -R /workspace/output
+
 COPY sh/* .
 
 
@@ -21,4 +24,4 @@ USER 1001
 ENV WORKENV=/workspace/output
 ENV GIT='https://github.com/RedHatTraining/DO101-apps.git'
 
-CMD [ "git-clone.sh" ]
+ENTRYPOINT sh git-clone.sh
