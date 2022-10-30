@@ -8,6 +8,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  volumeName: pv0027
   volumeMode: Filesystem
 

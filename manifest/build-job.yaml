@@ -5,8 +5,9 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccount: argocicd
       containers:
-      - name: buildah
+      - name: build-n-push
         env:
           - name: IMAGE
             valueFrom:
@@ -18,11 +19,13 @@ spec:
               configMapKeyRef:
                 name: ci-cd-details
                 key: imagetag
-        image: registry.redhat.io/rhel8/buildah:latest
-        workingDir: /workspace/output
-        command: ["/bin/bash"]
-        arg: 
-          - buildah bud -t $IMAGE:$TAG app/src/ContainerFile
+          - name: LOC
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: path
+        image: quay.io/argocicd/podman-build:v9
+#        workingDir: /workspace/output
         volumeMounts:
         - name: workspace
           mountPath: /workspace/output
@@ -30,9 +33,8 @@ spec:
           mountPath: /var/lib/containers
       restartPolicy: Never
       securityContext:
-        seLinuxOptions:
-          level: 's0:c27,c14'
-        fsGroup: 1000730000
+        fsGroup: 1000
+        fsGroupChangePolicy: 'Always'
       volumes:
         - name: workspace
           persistentVolumeClaim:

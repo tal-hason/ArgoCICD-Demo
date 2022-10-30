@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-16
+FROM quay.io/podman/stable
 
 # Create app directory
 WORKDIR /tmp
@@ -7,18 +7,18 @@ USER root
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY app/src/package*.json ./
+RUN mkdir -p /workspace/output
+RUN chown 1000:1000 -R /workspace/
+RUN chmod -R 0777 /workspace/
 
+COPY sh/* .
 
-# update the base image
-RUN npm install && npm audit fix --force
-# If you are building your code for production
-# RUN npm ci --only=production
+USER 1000
 
-# Bundle app source
-COPY app/src .
+ENV WORKENV=/workspace/output
+ENV GIT='https://github.com/tal-hason/ArgoCICD-Demo.git'
+ENV LOC=/app
+ENV IMAGE=thason/argocicd
+ENV TAG=latset
 
-USER 1001
-
-EXPOSE 8080
-CMD [ "node", "app.js" ]
+ENTRYPOINT sh /tmp/podman-b-n-p.sh

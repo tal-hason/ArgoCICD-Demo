@@ -4,5 +4,6 @@ metadata:
   name: ci-cd-details
 data:
   git: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
-  imagename: 'quay.io/thason/argocicd'
-  imagetag: "latest"
+  imagename: quay.io/argocicd/hello-world
+  imagetag: latest
+  path: /app
