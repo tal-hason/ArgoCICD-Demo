@@ -28,8 +28,7 @@ spec:
     spec:
       containers:
         - name: argocicd
-          image: >-
-            image-registry.openshift-image-registry.svc:5000/test/argocicd@sha256:e3714bd3e72f02a83195d83c4213717ce584a5eb89ba11c20d1031ca0f0a5661
+          image: quay.io/argocicd/hello-world:latest
           ports:
             - containerPort: 8080
               protocol: TCP
