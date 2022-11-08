@@ -4,7 +4,7 @@ application:
   namespace: openshift-gitops
 
 destination:
-  namespace: argo-demo
+  namespace: test
   server: 'https://kubernetes.default.svc'
   project: default
   source:
