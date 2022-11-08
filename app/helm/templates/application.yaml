@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.application.name }}
   namespace: {{ .Values.application.namespace }}
   annotations:
-    argocd-image-updater.argoproj.io/image-list: {{ .Values.imageupdater.image-list }}
+    argocd-image-updater.argoproj.io/image-list: example={{ .Values.imageupdater.image-list }}
     argocd-image-updater.argoproj.io/example.update-strategy: {{ .Values.imageupdater.strategy }}
     rollme: {{ randAlphaNum 5 | quote }}
 spec:

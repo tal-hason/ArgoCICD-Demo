@@ -4,7 +4,7 @@ application:
   namespace: openshift-gitops
 
 imageupdater:
-  image-list: 'example=quay.io/argocicd/hello-world'
+  image-list: 'quay.io/argocicd/hello-world'
   strategy: 'latest'
 
 destination:
