@@ -4,7 +4,7 @@ metadata:
   annotations:
   #  argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "2"
-  name: build-and-push-
+  generateName: build-and-push-
 spec:
   template:
     metadata:
