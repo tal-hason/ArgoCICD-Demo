@@ -20,7 +20,6 @@ spec:
       app: argocicd
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: argocicd
         deployment: argocicd
