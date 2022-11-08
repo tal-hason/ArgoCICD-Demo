@@ -2,6 +2,9 @@
 application:
   name: ci-app
   namespace: openshift-gitops
+imageupdater:
+  image-list: example=quay.io/argocicd/hello-world
+  strategy: latest
 
 destination:
   namespace: test
