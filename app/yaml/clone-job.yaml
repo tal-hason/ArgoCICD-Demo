@@ -4,7 +4,7 @@ metadata:
   annotations:
   #  argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "1"
-  generateName: git-clone-
+  name: git-clone-
 spec:
   template:
     spec:
