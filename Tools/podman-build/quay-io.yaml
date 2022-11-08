@@ -1,0 +1,9 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: quay.io
+  namespace: test
+data:
+  auth.json: >-
+    eyJhdXRocyI6eyJxdWF5LmlvIjp7InVzZXJuYW1lIjoiYXJnb2NpY2QrY3JlYXR1cmUiLCJwYXNzd29yZCI6Iko1M1IxNlJTSEdOOFg5Tk1LUThVSlVOTVpDQzlBSUVJRllZUDBINTZUMjBXNTBWSFlDMzVXQ1o0MUxHMDNOS0siLCJhdXRoIjoiWVhKbmIyTnBZMlFyWTNKbFlYUjFjbVU2U2pVelVqRTJVbE5JUjA0NFdEbE9UVXRST0ZWS1ZVNU5Xa05ET1VGSlJVbEdXVmxRTUVnMU5sUXlNRmMxTUZaSVdVTXpOVmREV2pReFRFY3dNMDVMU3c9PSIsImVtYWlsIjoiIn19fQ==
+type: kubernetes.io/dockerconfigjson

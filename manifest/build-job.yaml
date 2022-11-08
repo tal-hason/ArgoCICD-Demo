@@ -1,48 +1,47 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: build-and-push-
+ generateName: build-and-push-
 spec:
   template:
     metadata:
       name: build-n-push
     spec:
-      restartPolicy: Never
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: 'Always'
-        privileged: true
-      serviceAccount: argocicd
-      containers:
-      - name: build-n-push
-        env:
-          - name: IMAGE
-            valueFrom:
-              configMapKeyRef:
-                name: ci-cd-details
-                key: imagename
-          - name: TAG
-            valueFrom:
-              configMapKeyRef:
-                name: ci-cd-details
-                key: imagetag
-          - name: LOC
-            valueFrom:
-              configMapKeyRef:
-                name: ci-cd-details
-                key: path
-        image: quay.io/argocicd/podman-build:v9
-#         workingDir: /workspace/output
-        volumeMounts:
-        - name: workspace
-          mountPath: /workspace
-        - name: var
-          mountPath: /var/lib/containers/
-      volumes:
-        - name: workspace
-          persistentVolumeClaim:
-            claimName: workspace
-        - name: var
-          emptyDir: {}
-  
+     serviceAccount: argocicd
+     restartPolicy: Never
+     containers:
+     - name: build-n-push
+       image: quay.io/podman/stable
+       workingDir: /workspace/output
+       args:
+       - sh
+       - /workspace/output/Tools/podman-build/sh/podman-b-n-p.sh
+       securityContext:
+         privileged: true
+       env:
+         - name: IMAGE
+           valueFrom:
+             configMapKeyRef:
+               name: ci-cd-details
+               key: imagename
+         - name: TAG
+           valueFrom:
+             configMapKeyRef:
+               name: ci-cd-details
+               key: imagetag
+       volumeMounts:
+       - name: workspace
+         mountPath: /workspace
+       - name: var
+         mountPath: /var/lib/containers/
+       - name: imagepullsecret
+         mountPath: /run/containers/0/
+     volumes:
+     - name: workspace
+       persistentVolumeClaim:
+         claimName: workspace
+     - name: var
+       emptyDir: {}
+     - name: imagepullsecret
+       secret:
+         secretName: quay.io
