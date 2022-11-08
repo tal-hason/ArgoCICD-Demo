@@ -2,9 +2,9 @@ kind: Service
 apiVersion: v1
 metadata:
   name: argocicd
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "11"
+  # annotations:
+  #   argocd.argoproj.io/hook: Sync
+  #   argocd.argoproj.io/sync-wave: "11"
 spec:
   ports:
     - name: 8080-tcp
