@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    argocd.argoproj.io/hook: PreSync
+  #  argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "1"
   generateName: git-clone-
 spec:
