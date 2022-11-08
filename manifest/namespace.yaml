@@ -1,0 +1,13 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: test
+  labels:
+    kubernetes.io/metadata.name: test
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "-99"
+spec:
+  finalizers:
+    - kubernetes
+
