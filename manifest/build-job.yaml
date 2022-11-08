@@ -1,7 +1,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
- generateName: build-and-push-
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "2"
+  generateName: build-and-push-
 spec:
   template:
     metadata:

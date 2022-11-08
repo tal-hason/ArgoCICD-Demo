@@ -8,7 +8,7 @@ destination:
   server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: ./app/
+    path: ./manifest/
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
   syncPolicy:
