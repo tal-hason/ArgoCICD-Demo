@@ -10,6 +10,7 @@ spec:
   template:
     spec:
       serviceAccount: argocicd
+      restartPolicy: Never
       containers:
       - name: git-init
         env:
@@ -25,11 +26,10 @@ spec:
         volumeMounts:
         - name: workspace
           mountPath: /workspace
-      restartPolicy: Never
-      securityContext:
-        fsGroup: 1000
-        fsGroupChangePolicy: 'Always'
-        privileged: true
+        securityContext:
+          fsGroup: 1000
+          fsGroupChangePolicy: 'Always'
+          privileged: true
       volumes:
         - name: workspace
           persistentVolumeClaim:
