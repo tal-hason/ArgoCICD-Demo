@@ -4,7 +4,15 @@ metadata:
   generateName: build-and-push-
 spec:
   template:
+    metadata:
+      name: build-n-push
     spec:
+      restartPolicy: Never
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: 'Always'
+        privileged: true
       serviceAccount: argocicd
       containers:
       - name: build-n-push
@@ -25,19 +33,16 @@ spec:
                 name: ci-cd-details
                 key: path
         image: quay.io/argocicd/podman-build:v9
-#        workingDir: /workspace/output
+#         workingDir: /workspace/output
         volumeMounts:
         - name: workspace
-          mountPath: /workspace/output
+          mountPath: /workspace
         - name: var
-          mountPath: /var/lib/containers
-      restartPolicy: Never
-      securityContext:
-        fsGroup: 1000
-        fsGroupChangePolicy: 'Always'
+          mountPath: /var/lib/containers/
       volumes:
         - name: workspace
           persistentVolumeClaim:
             claimName: workspace
         - name: var
           emptyDir: {}
+  

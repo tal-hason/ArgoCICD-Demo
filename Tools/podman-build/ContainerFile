@@ -8,17 +8,16 @@ USER root
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 RUN mkdir -p /workspace/output
-RUN chown 1000:1000 -R /workspace/
-RUN chmod -R 0777 /workspace/
+RUN chown 1000:1000  /workspace && chown 1000:1000  /workspace/output
+RUN chmod -R 0775 /workspace && chmod -R 0775 /workspace/output
 
 COPY sh/* .
 
-USER 1000
 
-ENV WORKENV=/workspace/output
+ENV WORKENV='workspace/output'
 ENV GIT='https://github.com/tal-hason/ArgoCICD-Demo.git'
-ENV LOC=/app
+ENV LOC='app'
 ENV IMAGE=thason/argocicd
 ENV TAG=latset
 
-ENTRYPOINT sh /tmp/podman-b-n-p.sh
+#ENTRYPOINT sh /tmp/podman-b-n-p.sh

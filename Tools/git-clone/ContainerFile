@@ -8,8 +8,8 @@ USER root
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 RUN mkdir -p /workspace/output
-RUN chown -R 1000:1000  /workspace/
-RUN chmod -R 0777 /workspace/
+RUN chown 1000:1000  /workspace && chown 1000:1000  /workspace/output
+RUN chmod -R 0775 /workspace && chmod -R 0775 /workspace/output
 
 COPY sh/* .
 

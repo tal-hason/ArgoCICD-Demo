@@ -7,7 +7,7 @@ USER root
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY app/src/package*.json ./
+COPY src/package*.json ./
 
 
 # update the base image
@@ -16,7 +16,7 @@ RUN npm install && npm audit fix --force
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY app/src .
+COPY src .
 
 USER 1001
 
