@@ -5,8 +5,6 @@ metadata:
   namespace: {{ .Values.application.namespace }}
   annotations:
     argocd-image-updater.argoproj.io/image-list: example=quay.io/argocicd/hello-world
-    argocd-image-updater.argoproj.io/example.helm.image-name: image.name
-    argocd-image-updater.argoproj.io/example.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/example.update-strategy: 'latest'
     rollme: {{ randAlphaNum 5 | quote }}
 spec:
