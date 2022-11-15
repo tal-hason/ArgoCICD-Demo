@@ -22,7 +22,6 @@ spec:
           - name: WORKENV
             value: /workspace/output
         image: quay.io/argocicd/git-clone:v5
-#        workingDir: /workspace/output
         volumeMounts:
         - name: workspace
           mountPath: /workspace
