@@ -4,7 +4,7 @@ metadata:
   name: any-uid
 subjects:
   - kind: ServiceAccount
-    name: argoccicd
+    name: argocicd
     namespace: test
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
