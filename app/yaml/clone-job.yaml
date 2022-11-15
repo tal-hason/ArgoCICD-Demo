@@ -27,7 +27,6 @@ spec:
         - name: workspace
           mountPath: /workspace
         securityContext:
-          fsGroupChangePolicy: 'Always'
           privileged: true
       volumes:
         - name: workspace
