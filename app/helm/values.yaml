@@ -12,7 +12,7 @@ destination:
   server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: yaml
+    path: app/yaml
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
   syncPolicy:
