@@ -12,6 +12,5 @@ spec:
     requests:
       storage: 5Gi
   volumeMode: Filesystem
-  securityContext:
-    fsGroup: 1000
+
 
