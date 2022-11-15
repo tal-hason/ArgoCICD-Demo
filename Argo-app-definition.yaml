@@ -11,3 +11,5 @@ spec:
     path: app/Project
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
+  syncPolicy:
+    automated: {}
