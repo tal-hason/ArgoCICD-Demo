@@ -1,4 +1,0 @@
-# we just need the Helm for automation
-image:
-  name: quay.io/argocicd/hello-world
-  tag: latest
