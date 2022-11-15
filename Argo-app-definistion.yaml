@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: project-definitions
+spec:
+  destination:
+    namespace: test
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: app/Project
+    repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
+    targetRevision: main
