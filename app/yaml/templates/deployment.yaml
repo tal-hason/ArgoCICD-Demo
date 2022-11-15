@@ -4,6 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "10"
+    rollme: {{ randAlphaNum 5 | quote }}
   name: argocicd
   labels:
     app: argocicd
@@ -14,7 +15,7 @@ metadata:
     app.openshift.io/runtime: nodejs
     app.openshift.io/runtime-namespace: test
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: argocicd
@@ -23,8 +24,6 @@ spec:
       labels:
         app: argocicd
         deployment: argocicd
-      annotations:
-        openshift.io/generated-by: OpenShiftWebConsole
     spec:
       containers:
         - name: argocicd
