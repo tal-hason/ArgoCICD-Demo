@@ -1,8 +1,8 @@
 ---
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: simple-deployment
+  name: argocicd
 spec:
   template:
     spec:
