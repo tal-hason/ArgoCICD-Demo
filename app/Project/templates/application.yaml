@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.application.namespace }}
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: example=quay.io/argocicd/hello-world
+    argocd-image-updater.argoproj.io/example.update-strategy: 'latest'
+    rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  destination:
+    namespace: {{ .Values.destination.namespace }}
+    server: {{ .Values.destination.server }}
+  project: {{ .Values.destination.project }}
+  source:
+    path: {{ .Values.destination.source.path }}
+    repoURL: {{ .Values.destination.source.repoURL }}
+    targetRevision: {{ .Values.destination.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: {{ .Values.destination.syncPolicy.automated.prune }}
+      selfHeal: {{ .Values.destination.syncPolicy.automated.selfHeal }}
+    syncOptions:
+      - CreateNamespace=true
