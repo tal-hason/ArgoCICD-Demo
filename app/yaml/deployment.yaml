@@ -1,8 +1,6 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  annotations:
-    rollme: {{ randAlphaNum 5 | quote }}
   name: argocicd
   labels:
     app: argocicd
