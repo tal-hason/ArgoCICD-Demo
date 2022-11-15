@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/part-of: argocicd-app
     app.openshift.io/runtime: nodejs
     app.openshift.io/runtime-namespace: test
-
 spec:
   replicas: 3
   selector:
