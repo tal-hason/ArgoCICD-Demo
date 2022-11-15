@@ -7,6 +7,7 @@ metadata:
   annotations:
   #  argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-99"
+    openshift.io/sa.scc.mcs: s0:c26,c5
     openshift.io/sa.scc.supplemental-groups: 1000660000/1000
     openshift.io/sa.scc.uid-range: 1000660000/1000
 spec:
