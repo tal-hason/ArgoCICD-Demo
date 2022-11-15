@@ -5,5 +5,5 @@ metadata:
 data:
   git: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
   imagename: quay.io/argocicd/hello-world
-  imagetag: '1.1'
+  imagetag: '1.2'
   path: app
