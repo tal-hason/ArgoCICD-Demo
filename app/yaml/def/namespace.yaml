@@ -7,6 +7,8 @@ metadata:
   annotations:
   #  argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "-99"
+    openshift.io/sa.scc.supplemental-groups: 1000660000/10000
+    openshift.io/sa.scc.uid-range: 1000660000/1000
 spec:
   finalizers:
     - kubernetes
