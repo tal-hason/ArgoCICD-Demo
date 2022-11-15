@@ -3,10 +3,6 @@ application:
   name: ci-app
   namespace: openshift-gitops
 
-imageupdater:
-  image-list: 'quay.io/argocicd/hello-world'
-  strategy: 'latest'
-
 destination:
   namespace: test
   server: 'https://kubernetes.default.svc'
