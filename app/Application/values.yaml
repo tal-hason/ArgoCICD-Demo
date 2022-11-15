@@ -18,7 +18,7 @@ destination:
   syncPolicy:
     automated:
       prune: true
-      selfHeal: false
+      selfHeal: true
 
 # Just testing 11
 
