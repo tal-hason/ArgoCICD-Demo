@@ -1,0 +1,69 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: argo-cli
+  namespace: openshift-gitops
+spec:
+  restartPolicy: Always
+  serviceAccountName: openshift-gitops-argocd-server
+  imagePullSecrets:
+    - name: default-dockercfg-zmql5
+  priority: 0
+  schedulerName: default-scheduler
+  enableServiceLinks: true
+  terminationGracePeriodSeconds: 30
+  preemptionPolicy: PreemptLowerPriority
+  nodeName: crc-wkzjw-master-0
+  securityContext:
+    seLinuxOptions:
+      level: 's0:c26,c5'
+    runAsNonRoot: true
+    fsGroup: 1000660000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - resources: {}
+      terminationMessagePath: /dev/termination-log
+      name: argocli
+      securityContext:
+        privileged: true
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: kube-api-access-knzpr
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePolicy: File
+      image: 'quay.io/argocicd/argocli:latest'
+      args:
+        - sleep
+        - '100000'
+  serviceAccount: default
+  volumes:
+    - name: kube-api-access-knzpr
+      projected:
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+                - key: ca.crt
+                  path: ca.crt
+          - downwardAPI:
+              items:
+                - path: namespace
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+          - configMap:
+              name: openshift-service-ca.crt
+              items:
+                - key: service-ca.crt
+                  path: service-ca.crt
+        defaultMode: 420
+  dnsPolicy: ClusterFirst
+
