@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: "2"
-  name: build-and-push-{{ randAlphaNum 5 }}
+  name: build-and-push-{{ randAlphaNum 5 | lower }}
   namespace: {{ .Values.job.namespace }}
 spec:
   template:
