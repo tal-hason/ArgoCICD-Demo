@@ -18,6 +18,6 @@ destination:
 
 
 job:
-  namespace: openshift-gitops
+  namespace: test
 # Just testing 11
 
