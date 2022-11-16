@@ -31,7 +31,7 @@ spec:
           terminationMessagePolicy: File
           imagePullPolicy: Always
           resources:
-            request:
+            requests:
               cpu: '250m'
               memory: '256Mi'
             limits:
