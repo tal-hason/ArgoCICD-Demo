@@ -5,7 +5,7 @@ resources:
 - ../../base
 
 configMapGenerator:
-- name: my-configmap
+- name: ci-cd-details
   namespace: test
   literals:	
   - git='https://github.com/tal-hason/ArgoCICD-Demo.git'
