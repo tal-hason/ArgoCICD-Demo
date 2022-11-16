@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+  name: git-clone-{{ randAlphaNum 5 }}
+  namespace: {{ .Values.job.namespace }}
+spec:
+  template:
+    spec:
+      serviceAccount: argocicd
+      restartPolicy: Never
+      containers:
+      - name: git-init
+        env:
+          - name: GIT
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: git
+          - name: WORKENV
+            value: /workspace/output
+        image: quay.io/argocicd/git-clone:v5
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        securityContext:
+          privileged: true
+      volumes:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: workspace
