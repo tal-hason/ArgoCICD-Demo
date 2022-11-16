@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: 'quay.io/argocicd/hello-world:1.x'
+    argocd.argoproj.io/hook: Sync
+    rollme: VAKYt
+  name: hello-world-app
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: test
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    kustomize:
+      images:
+        - 'quay.io/argocicd/hello-world:1.2'
+    path: app/yaml/Overlay/test
+    repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
