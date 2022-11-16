@@ -16,5 +16,8 @@ destination:
       prune: true
       selfHeal: true
 
+
+job:
+  namespace: openshift-gitops
 # Just testing 11
 
