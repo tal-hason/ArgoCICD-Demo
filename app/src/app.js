@@ -4,7 +4,7 @@ var express = require('express');
 app = express();
 
 app.get('/', function (req, res) {
-  res.send(`Hello Everybody :-), I"m Kustomized right now from ${image}:${tag} `);
+  res.send(`Hello World, My Image is ${image}:${tag} `);
 });
 
 app.listen(8080, function () {
