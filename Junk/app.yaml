@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: 'quay.io/argocicd/hello-world:1.x'
-    argocd.argoproj.io/hook: Sync
+#    argocd.argoproj.io/hook: Sync
     rollme: VAKYt
   name: hello-world-app
   namespace: openshift-gitops
