@@ -13,9 +13,6 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    kustomize:
-      images:
-        - 'quay.io/argocicd/hello-world:1.2'
     path: app/yaml/Overlay/test
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
@@ -25,3 +22,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/template/spec/containers/image
