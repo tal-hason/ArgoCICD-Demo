@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
-- clone-job.yaml
-- build-job.yaml
+# - clone-job.yaml
+# - build-job.yaml
 - route.yaml
 
 

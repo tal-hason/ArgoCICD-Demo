@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.application.name }}
   namespace: {{ .Values.application.namespace }}
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd-image-updater.argoproj.io/image-list: quay.io/argocicd/hello-world:1.x
     rollme: {{ randAlphaNum 5 | quote }}
 spec:
