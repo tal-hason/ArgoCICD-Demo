@@ -1,6 +1,6 @@
 # Values for ArgoCD Application
 application:
-  name: ci-app
+  name: hello-world-app
   namespace: openshift-gitops
 
 destination:
