@@ -4,10 +4,6 @@ kind: Kustomization
 resources:
 - ../../base
 
-
-patchesStrategicMerge:
-- version.yaml
-
 configMapGenerator:
 - name: my-configmap
   literals:	
