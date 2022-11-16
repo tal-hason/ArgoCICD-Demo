@@ -15,4 +15,5 @@ configMapGenerator:
 generatorOptions:
  disableNameSuffixHash: true
  annotations:
-   annotations.only.for.generated: hello-world-app-config
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "0"
