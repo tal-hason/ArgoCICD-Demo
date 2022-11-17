@@ -1,8 +1,0 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name:
-spec:
-  selector:
-    app: dev-argocicd
-    deployment: dev-argocicd

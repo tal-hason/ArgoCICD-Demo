@@ -3,7 +3,8 @@ kind: Kustomization
 
 resources:
 - ../../base
-
+- build-job.yaml
+- clone-job.yaml
 
 configMapGenerator:
 - name: ci-cd-details
@@ -18,7 +19,3 @@ generatorOptions:
  disableNameSuffixHash: true
  annotations:
     argocd.argoproj.io/sync-wave: "0"
-
-patchesStrategicMerge:
-- ArgoApp.yaml
-- jobs-ns.yaml
