@@ -16,5 +16,4 @@ configMapGenerator:
 generatorOptions:
  disableNameSuffixHash: true
  annotations:
-    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "0"
