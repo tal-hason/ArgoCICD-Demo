@@ -16,4 +16,7 @@ ci-cd-app/Overlays/hw-app - the kustomaized hw-app layer with the ci jobs
 Project - an Argo App with HELM chart
 
 Tools/git-clone - the Dockerfile for the git-clone job image
-Tools/git-clone/sh
+Tools/git-clone/sh - the git clone script
+Tools/podman-build - Dockerfile for the podman build(in the job i amusing the officail podman image from quay.io)
+Tools/podman-build/sh - the podman build and push script
+
