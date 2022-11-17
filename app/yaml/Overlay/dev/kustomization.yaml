@@ -9,3 +9,4 @@ resources:
 
 patchesStrategicMerge:
 - version.yaml
+- service-dev.yaml
