@@ -15,4 +15,5 @@ ci-cd-app/Overlays/hw-app - the kustomaized hw-app layer with the ci jobs
 
 Project - an Argo App with HELM chart
 
-Tools 
+Tools/git-clone - the Dockerfile for the git-clone job image
+Tools/git-clone/sh
