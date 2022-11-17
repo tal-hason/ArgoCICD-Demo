@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
 - ../../base
+- build-job.yaml
+- clone-job.yaml
 
 configMapGenerator:
 - name: ci-cd-details
