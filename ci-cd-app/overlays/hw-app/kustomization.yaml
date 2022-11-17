@@ -12,7 +12,7 @@ configMapGenerator:
   literals:	
   - git='https://github.com/tal-hason/ArgoCICD-Demo.git'
   - imagename=quay.io/argocicd/hello-world
-  - imagetag='1.7'
+  - imagetag='1.8'
   - path=app
 
 generatorOptions:
