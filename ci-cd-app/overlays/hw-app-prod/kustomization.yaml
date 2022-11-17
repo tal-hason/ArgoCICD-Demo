@@ -8,11 +8,11 @@ resources:
 
 configMapGenerator:
 - name: ci-cd-details
-  namespace: test
+  namespace: prod
   literals:	
   - git='https://github.com/tal-hason/ArgoCICD-Demo.git'
   - imagename=quay.io/argocicd/hello-world
-  - imagetag='1.8'
+  - imagetag='2.0'
   - path=app
 
 generatorOptions:
@@ -23,3 +23,4 @@ generatorOptions:
 patchesStrategicMerge:
 - ArgoApp.yaml
 - jobs-ns.yaml
+    
