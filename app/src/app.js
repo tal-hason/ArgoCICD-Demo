@@ -5,6 +5,7 @@ app = express();
 
 app.get('/', function (req, res) {
   res.send(`Hello Red-Hat!, My Image is ${image}:${tag} `);
+  console.log('Someone accessed me!')
 });
 
 app.listen(8080, function () {
