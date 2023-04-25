@@ -8,4 +8,5 @@ resources:
 - rolebindings-any-uid.yaml
 - rolebindings-privileged.yaml
 - pvc.yaml
+- quay-io.yaml
 
