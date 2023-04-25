@@ -1,6 +1,6 @@
 git=github.com/tal-hason/ArgoCICD-Demo.git
 imagename=quay.io/argocicd/hello-world
-imagetag=v1.14
+imagetag=v1.15
 path=app
 WORKENV=/workspace/output
 username=tal-hason

@@ -49,7 +49,7 @@ spec:
               secretKeyRef:
                 name: gh-token
                 key: token
-        image: quay.io/argocicd/git-clone:v5
+        image: quay.io/argocicd/update-deploy:v3
         volumeMounts:
         - name: workspace
           mountPath: /workspace
