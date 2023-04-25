@@ -1,17 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: 'quay.io/argocicd/hello-world:1.x'
-  name: hello-world-app
+  name: ci-cd-setting
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: test
+    namespace: ci-cd
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: app/yaml/Overlay/dev
+    path: app/yaml/Overlay/def
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
   syncPolicy:
@@ -20,8 +18,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  # ignoreDifferences:
-  # - group: apps
-  #   kind: Deployment
-  #   jsonPointers:
-  #   - /spec/template/spec/containers/image
