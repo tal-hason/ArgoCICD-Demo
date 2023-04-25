@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
 - app.yaml
 - serviceaccount.yaml
+- group.yaml
 - rolebindings-any-uid.yaml
+- rolebindings-privileged.yaml
 
 
