@@ -5,6 +5,11 @@ namespace: test
 resources:
 - ../../base
 
+configMapGenerator:
+- name: ci-cd-details
+  files:
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+
 
 images:
 - name: quay.io/argocicd/hello-world
