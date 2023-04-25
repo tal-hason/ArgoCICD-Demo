@@ -1,8 +1,0 @@
-git=github.com/tal-hason/ArgoCICD-Demo.git
-imagename=quay.io/argocicd/hello-world
-imagetag=v1.20
-path=app
-WORKENV=/workspace/output
-username=tal-hason
-email=something@somewhere.com
-commit_message="new app version"
