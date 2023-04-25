@@ -30,17 +30,17 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: Always
-          env:
-          - name: IMAGE
-            valueFrom:
-               configMapKeyRef:
-                 name: ci-cd-details
-                 key: imagename
-          - name: TAG
-            valueFrom:
-              configMapKeyRef:
-                name: ci-cd-details
-                key: imagetag
+          # env:
+          # - name: IMAGE
+          #   valueFrom:
+          #      configMapKeyRef:
+          #        name: ci-cd-details
+          #        key: imagename
+          # - name: TAG
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: ci-cd-details
+          #       key: imagetag
           resources:
             requests:
               cpu: '250m'
