@@ -6,5 +6,7 @@ resources:
 - ../../base
 
 
-patchesStrategicMerge:
-- version.yaml
+images:
+- name: quay.io/argocicd/hello-world
+  newName: 'quay.io/argocicd/hello-world'
+  newTag: latest
