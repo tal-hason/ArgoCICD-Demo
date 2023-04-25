@@ -6,7 +6,7 @@ app = express();
 
 app.get('/', function (req, res) {
   res.send(`Hello new image, My Image is ${image}:${tag} , the Server is ${host} accessed from ${clientHostname} `);
-  var clientHostname = req.headers.host;
+  const clientHostname = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log(`Someone accessed me! from ${clientHostname}`)
 });
 
