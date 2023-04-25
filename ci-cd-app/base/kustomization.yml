@@ -7,5 +7,5 @@ resources:
 - group.yaml
 - rolebindings-any-uid.yaml
 - rolebindings-privileged.yaml
-
+- pvc.yaml
 
