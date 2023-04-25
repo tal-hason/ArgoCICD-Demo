@@ -5,6 +5,7 @@ resources:
 - ../../base
 - build-job.yaml
 - clone-job.yaml
+- Update-image.yaml
 
 configMapGenerator:
 - name: ci-cd-details
