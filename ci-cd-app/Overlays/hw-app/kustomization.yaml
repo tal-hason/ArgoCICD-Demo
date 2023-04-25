@@ -8,7 +8,7 @@ resources:
 
 configMapGenerator:
 - name: ci-cd-details
-  files:
+  envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
 
 generatorOptions:
