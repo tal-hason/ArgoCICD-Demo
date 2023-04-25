@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
 - app.yaml
-
+- serviceaccount.yaml
 
 
