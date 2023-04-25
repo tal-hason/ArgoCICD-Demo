@@ -5,8 +5,11 @@ var express = require('express');
 app = express();
 
 app.get('/', function (req, res) {
+
+  var clientHostname = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  
   res.send(`Hello new image, My Image is ${image}:${tag} , the Server is ${host} accessed from ${clientHostname} `);
-  const clientHostname = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
   console.log(`Someone accessed me! from ${clientHostname}`)
 });
 

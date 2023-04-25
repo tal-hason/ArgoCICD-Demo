@@ -11,7 +11,8 @@ metadata:
     app.openshift.io/runtime: nodejs
     app.openshift.io/runtime-namespace: test
 spec:
-  replicas: 3
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: argocicd

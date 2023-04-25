@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
     argocd.argoproj.io/sync-wave: "3"
-  name: update-deploy
+  name: staep-3-update-deploy
 spec:
   template:
     spec:

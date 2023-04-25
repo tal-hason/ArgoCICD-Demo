@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
     argocd.argoproj.io/sync-wave: "2"
-  name: build-and-push
+  name: staep-2-build-and-push
 spec:
   template:
     metadata:

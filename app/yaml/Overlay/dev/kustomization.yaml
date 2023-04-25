@@ -13,3 +13,14 @@ images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
   newTag: v1.19
+
+patchesJSON6902:
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: argocicd
+  patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 1
