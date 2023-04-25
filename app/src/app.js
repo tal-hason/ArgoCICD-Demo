@@ -4,7 +4,7 @@ var express = require('express');
 app = express();
 
 app.get('/', function (req, res) {
-  res.send(`Hello tesst, My Image is ${image}:${tag} `);
+  res.send(`Hello new image, My Image is ${image}:${tag} `);
   console.log('Someone accessed me!')
 });
 
