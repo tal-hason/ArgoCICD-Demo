@@ -5,7 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: argoccicd
-
+    namespace: ci-cd
   - kind: Group
     apiGroup: rbac.authorization.k8s.io
     name: run-prv
