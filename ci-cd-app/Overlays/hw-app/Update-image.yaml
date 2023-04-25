@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "3"
+  name: update-deploy
+spec:
+  template:
+    spec:
+      serviceAccount: argocicd
+      restartPolicy: Never
+      containers:
+      - name: update-deploy
+        env:
+          - name: GIT
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: git
+          - name: WORKENV
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: WORKENV
+          - name: TAG
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: imagetag
+          - name: NAME
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: username
+          - name: EMAIL
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: email
+          - name: COMMIT
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: commit_message
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: gh-token
+                key: token
+        image: quay.io/argocicd/git-clone:v5
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        securityContext:
+          privileged: true
+      volumes:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: workspace

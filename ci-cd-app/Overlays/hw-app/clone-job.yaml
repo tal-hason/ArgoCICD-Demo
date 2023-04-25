@@ -20,8 +20,11 @@ spec:
                 name: ci-cd-details
                 key: git
           - name: WORKENV
-            value: /workspace/output
-        image: quay.io/argocicd/git-clone:v5
+            valueFrom:
+              configMapKeyRef:
+                name: ci-cd-details
+                key: WORKENV
+        image: quay.io/argocicd/git-clone:v6
         volumeMounts:
         - name: workspace
           mountPath: /workspace

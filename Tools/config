@@ -1,4 +1,8 @@
-git=https://github.com/tal-hason/ArgoCICD-Demo.git
+git=github.com/tal-hason/ArgoCICD-Demo.git
 imagename=quay.io/argocicd/hello-world
-imagetag=1.13
+imagetag=v1.13
 path=app
+WORKENV=/workspace/output
+username=tal-hason
+email=something@somewhere.com
+commit_message="new app version"
