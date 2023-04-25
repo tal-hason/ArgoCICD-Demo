@@ -6,7 +6,6 @@ metadata:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: "1"
   name: git-clone
-  namespace: test
 spec:
   template:
     spec:
