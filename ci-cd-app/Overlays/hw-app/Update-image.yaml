@@ -48,7 +48,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: gh-token
-                key: token
+                key: TOKEN
         image: quay.io/argocicd/update-deploy:v3
         volumeMounts:
         - name: workspace
