@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
       - name: argocicd
-        image: 'quay.io/argocicd/hello-world:1.0'
+        image: 'quay.io/argocicd/hello-world:1.13'
