@@ -12,4 +12,4 @@ configMapGenerator:
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: '1.13'
+  newTag: v:test
