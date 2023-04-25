@@ -4,7 +4,7 @@ In this repo we have a Project that demoenstrait a full CI and CD pipeline that 
 
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
 
-[CI Application](https://github.com/tal-hason/ArgoCICD-Demo/blob/ad6ff3be3097d24bc31ed0ddced0945fc952640d/pictures/ci-Process.png?raw=true)
+![CI Application](https://github.com/tal-hason/ArgoCICD-Demo/blob/ad6ff3be3097d24bc31ed0ddced0945fc952640d/pictures/ci-Process.png?raw=true)
 
 ### the CI Kustomization File
 
@@ -31,7 +31,7 @@ generatorOptions:
 
 ## The Hello-world application also build with kustomized layer and is related to the the same config
 
-[Hello-World-App](https://github.com/tal-hason/ArgoCICD-Demo/blob/assests/pictures/Hello-world-App.png?raw=true)
+![Hello-World-App](https://github.com/tal-hason/ArgoCICD-Demo/blob/assests/pictures/Hello-world-App.png?raw=true)
 
 ### the Hello-world app Kustomization File
 
