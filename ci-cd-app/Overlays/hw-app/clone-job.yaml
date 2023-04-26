@@ -24,7 +24,7 @@ spec:
               configMapKeyRef:
                 name: ci-cd-details
                 key: WORKENV
-        image: quay.io/argocicd/git-clone:v7
+        image: quay.io/argocicd/git-clone:v8
         volumeMounts:
         - name: workspace
           mountPath: /workspace
