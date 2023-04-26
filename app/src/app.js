@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 
   res.send(`Hello Red-Hat, My Image is ${image}:${tag} , the Server is ${host} accessed from ${clientHostname} `);
 
-  console.log(`Someone accessed me! from ${clientHostname}`)
+  console.log(`Someone accessed me! --> from ${clientHostname}`)
 });
 
 
