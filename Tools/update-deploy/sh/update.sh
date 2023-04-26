@@ -1,25 +1,42 @@
 #!/bin/bash
-echo "Load the latest git hash to TAG env var"
-export TAG=$(cat $WORKENV/git_hash)
 
-echo 'Update deployment with the new build tag'
-sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
+# Exit script immediately if a command exits with a non-zero status
+set -e
 
-echo 'Update Condifgmap with the new build tag'
-sed -i 's/TAG=.*/TAG='${TAG}'/' $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
+# Set Git User Name & E-mail
+git config --global user.email "$EMAIL"
+git config --global user.name "$NAME"
 
-# Set Git User Nmae & E-mail
-git config --global user.email $EMAIL
-git config --global user.name $NAME
+if [[ "$ENV" == "prod" ]]; then
+  echo "Update Production Image from Dev"
 
-# Move to the Git Folder
-cd $WORKENV
+  # Get the current image from Dev and set it as $TAG
+  TAG=$(yq eval '.images[].newTag' "$WORKENV/app/yaml/Overlay/dev/kustomization.yaml")
+  
+  echo "Update production deployment with the dev tag"
+  sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  
+  echo "Update ConfigMap with the new build tag"
+  sed -i "s/TAG=.*/TAG=$TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+else
+  echo "Load the latest git hash to TAG env var"
+  TAG=$(cat "$WORKENV/git_hash")
+  
+  echo "Update deployment with the new build tag"
+  sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  
+  echo "Update ConfigMap with the new build tag"
+  sed -i "s/TAG=.*/TAG=$TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+fi
 
-echo 'Add new Change to the Git'
-git add $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
+# Move to the Git folder
+cd "$WORKENV"
 
-echo "Commit New Version"
-git commit -m "${COMMIT}"
+echo "Add new change to Git"
+git add "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
 
-echo "Push Update to Git"
-git push https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git
+echo "Commit new version"
+git commit -m "$COMMIT"
+
+echo "Push update to Git"
+git push "https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git"
