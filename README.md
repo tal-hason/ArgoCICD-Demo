@@ -58,7 +58,7 @@ configMapGenerator:
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
 #
-# Change destination to promote from dev to drod
+# Change destination to promote from dev to prod
 #
 - name: promote
   literals:
@@ -75,8 +75,9 @@ generatorOptions:
 
 When the destination equal "prod":
 
-* the build and push job skips builidng a new image.
-* the update job get the image tag from the dev depolyment and update the production.
+* The build and push job skips builidng a new image.
+* The update job get the image tag from the dev depolyment and update the production.
+* All the JObs now runs directly from the latest cloned script so every changes to the job script will be updated on the fly! no need to build new images.
 
 ## The Hello-world application also build with kustomized layer and is related to the same config
 
