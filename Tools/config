@@ -4,5 +4,5 @@ imagetag=v1.26_GA
 path=app
 WORKENV=/workspace/output
 username=tal-hason
-email=something@somewhere.com
+email=thason@redhat.com
 commit_message=new app version
