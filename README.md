@@ -5,6 +5,12 @@
 
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
+> To start the CI Application on your ArgoCD Instance run the following command to your installed argoCD instance namespace
+
+```Bash
+oc apply -f Tools/Deployment-bootstrap.yaml -n {{Argocd-Namespace}}
+```
+
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
 
 ![CI Application](https://github.com/tal-hason/ArgoCICD-Demo/blob/ad6ff3be3097d24bc31ed0ddced0945fc952640d/pictures/ci-Process.png?raw=true)
