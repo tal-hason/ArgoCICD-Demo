@@ -40,8 +40,8 @@ spec:
           - name: TAG
             valueFrom:
               configMapKeyRef:
-                name: ci-cd-details
-                key: imagetag
+                name: tag
+                key: TAG
           resources:
             requests:
               cpu: '250m'

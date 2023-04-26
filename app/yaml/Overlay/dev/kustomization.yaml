@@ -4,12 +4,15 @@ kind: Kustomization
 resources:
 - ../../base
 
+nameSuffix: -dev
+
 configMapGenerator:
 - name: ci-cd-details
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
-
-nameSuffix: -dev
+- name: tag
+  literals:
+    - TAG=v1.27_GA
 
 images:
 - name: quay.io/argocicd/hello-world

@@ -7,4 +7,4 @@ git clone https://${GIT} ${WORKENV}
 echo "Show Folder Content" 
 ls -l ${WORKENV}
 echo "Get latest Git Log Hash for the new Tag"
-git log -1 --format="%h" | cut -c1-6 > git_hash
+git log -1 --format="%h" | cut -c1-6 > ${WORKENV}/git_hash
