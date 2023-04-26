@@ -24,7 +24,7 @@ data:
 type: Opaque
 ```
 
-> in order for the Build and Push step to successed, Please create a Secret Named "quay.io" with config key named auth.json (podman) and its value your image registry dockercfg json
+> in order for the Build and Push step to successed, Please create a Secret Named "quay.io" with config key named auth.json (podman) and its value your image registry .dockerconfigjson content
 
 ```YAML
 kind: Secret
@@ -33,7 +33,7 @@ metadata:
   name: quay.io
 data:
   auth.json: >-
-{{ Your dockercfg file | Base64 }}
+{{ Your .dockerconfigjson file content | Base64 }}
 type: Opaque
 ```
 
