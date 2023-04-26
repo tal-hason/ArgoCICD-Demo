@@ -22,7 +22,7 @@ metadata:
 data:
   TOKEN: {{ Your GitHub PAT Here | Base64 }}
 type: Opaque
-
+```
 
 > in order for the Build and Push step to successed, Please create a Secret Named "quay.io" with config key named auth.json (podman) and its value your image registry dockercfg json
 
