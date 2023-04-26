@@ -2,10 +2,11 @@
 
 [Live Demo](https://youtu.be/sFNHS1mdglI)
 
-
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
+* Please Fork the Repo and work with your own details *
 > To start the CI Application on your ArgoCD Instance run the following command to your installed argoCD instance namespace
+> in order for the update step to succesed, Please create a Secret named "gh-token" with a single Key named "TOKEN" that stores your GitHub PAT(Personal Access Token).
 
 ```Bash
 oc apply -f Tools/Deployment-bootstrap.yaml -n {{Argocd-Namespace}}
