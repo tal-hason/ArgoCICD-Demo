@@ -7,5 +7,5 @@ resources:
 - rolebindings-any-uid.yaml
 - rolebindings-privileged.yaml
 - pvc.yaml
-- quay-io.yaml
+# - quay-io.yaml # Quay.io Image Pull and Push Secret
 
