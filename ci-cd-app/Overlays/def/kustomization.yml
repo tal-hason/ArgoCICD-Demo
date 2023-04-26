@@ -23,3 +23,7 @@ configMapGenerator:
   files:
   - https://github.com/tal-hason/ArgoCICD-Demo/raw/main/Tools/update-deploy/sh/update.sh
 
+generatorOptions:
+ disableNameSuffixHash: true
+ annotations:
+    argocd.argoproj.io/sync-wave: "0"
