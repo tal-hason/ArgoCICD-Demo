@@ -12,12 +12,12 @@ configMapGenerator:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
 - name: tag
   literals:
-    - TAG=v1.27_GA
+    - TAG=ca3001
 
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: v1.27_GA
+  newTag: ca3001
 
 patchesJSON6902:
 - target:
