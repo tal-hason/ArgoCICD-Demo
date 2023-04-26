@@ -18,7 +18,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: ci-cd-details
-                key: git_url
+                key: git
           - name: WORKENV
             valueFrom:
               configMapKeyRef:
