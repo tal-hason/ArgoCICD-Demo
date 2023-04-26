@@ -56,7 +56,7 @@ resources:
 configMapGenerator:
 - name: ci-cd-details
   envs:
-  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 #
 # Change destination to promote from dev to prod
 #
@@ -97,7 +97,7 @@ nameSuffix: -dev
 configMapGenerator:
 - name: ci-cd-details
   envs:
-  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 - name: tag
   literals:
     - TAG=ca3001
@@ -140,7 +140,7 @@ nameSuffix: -prod
 configMapGenerator:
 - name: ci-cd-details
   envs:
-  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 - name: tag
   literals:
     - TAG=ca3001
