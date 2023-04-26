@@ -7,11 +7,36 @@ In this repo we have a Project that demoenstrait a full CI and CD pipeline that 
 * Please Fork the Repo and work with your own details *
 
 > To start the CI Application on your ArgoCD Instance run the following command to your installed argoCD instance namespace
-> in order for the update step to succesed, Please create a Secret named "gh-token" with a single Key named "TOKEN" that stores your GitHub PAT(Personal Access Token).
 
 ```Bash
 oc apply -f Tools/Deployment-bootstrap.yaml -n {{Argocd-Namespace}}
 ```
+
+> in order for the update step to successed, Please create a Secret named "gh-token" with a single Key named "TOKEN" that stores your GitHub PAT(Personal Access Token).
+
+```YAML
+kind: Secret
+apiVersion: v1
+metadata:
+  name: gh-token
+data:
+  TOKEN: {{ Your GitHub PAT Here | Base64 }}
+type: Opaque
+
+
+> in order for the Build and Push step to successed, Please create a Secret Named "quay.io" with config key named auth.json (podman) and its value your image registry dockercfg json
+
+```YAML
+kind: Secret
+apiVersion: v1
+metadata:
+  name: quay.io
+data:
+  auth.json: >-
+ewogICJhdXRocyI6IHsKICAgICJxdWF5LmlvIjogewogICAgICAiYXV0aCI6ICJZWEpuYjJOcFkyUXJZM0psWVhSMWNtVTZTalV6VWpFMlVsTklSMDQ0V0RsT1RVdFJPRlZLVlU1TldrTkRPVUZKUlVsR1dWbFFNRWcxTmxReU1GYzFNRlpJV1VNek5WZERXalF4VEVjd00wNUxTdz09IiwKICAgICAgImVtYWlsIjogIiIKICAgIH0KICB9Cn0=
+type: Opaque
+```
+
 
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
 
