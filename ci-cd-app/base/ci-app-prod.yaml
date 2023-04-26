@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world-app-dev
+  name: hello-world-app-prod
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: application-dev
+    namespace: application-prod
     server: 'https://kubernetes.default.svc'
   project: default
   source:
