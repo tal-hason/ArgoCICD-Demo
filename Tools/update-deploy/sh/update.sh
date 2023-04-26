@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo 'Update with the new build tag'
-sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
+sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
 
 # Set Git User Nmae & E-mail
 git config --global user.email $EMAIL
@@ -11,7 +11,7 @@ git config --global user.name $NAME
 cd $WORKENV
 
 echo 'Add new Change to the Git'
-git add $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
+git add $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
 
 echo "Commit New Version"
 git commit -m "${COMMIT}"

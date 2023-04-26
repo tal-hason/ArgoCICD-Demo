@@ -33,6 +33,11 @@ spec:
              configMapKeyRef:
                name: ci-cd-details
                key: imagetag
+         - name: ENV
+           valueFrom:
+             configMapKeyRef:
+               name: promote
+               key: destination
        volumeMounts:
        - name: workspace
          mountPath: /workspace

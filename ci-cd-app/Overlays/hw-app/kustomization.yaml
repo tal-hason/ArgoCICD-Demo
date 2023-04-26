@@ -11,6 +11,12 @@ configMapGenerator:
 - name: ci-cd-details
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+#
+# Change destination to promote from dev to drod
+#
+- name: promote
+  literals:
+    - destination=dev
 
 generatorOptions:
  disableNameSuffixHash: true
