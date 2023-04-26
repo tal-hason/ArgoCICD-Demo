@@ -1,4 +1,4 @@
-git_url="https://github.com/tal-hason/ArgoCICD-Demo.git"
+git_url=https://github.com/tal-hason/ArgoCICD-Demo.git
 imagename=quay.io/argocicd/hello-world
 path=app
 WORKENV=/workspace/output
