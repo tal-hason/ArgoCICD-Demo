@@ -28,11 +28,11 @@ spec:
              configMapKeyRef:
                name: ci-cd-details
                key: imagename
-         - name: TAG
-           valueFrom:
-             configMapKeyRef:
-               name: ci-cd-details
-               key: imagetag
+        #  - name: TAG
+        #    valueFrom:
+        #      configMapKeyRef:
+        #        name: ci-cd-details
+        #        key: imagetag
          - name: ENV
            valueFrom:
              configMapKeyRef:
