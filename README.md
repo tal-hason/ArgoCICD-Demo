@@ -4,7 +4,7 @@
 
 In this repo we have a Project that demonstrate a full CI and CD pipeline that is utilized with only ArgoCD
 
-** Please Fork the Repo and work with your own details **
+**Please Fork the Repo and work with your own details**
 
 > To start the CI Application on your ArgoCD Instance run the following command to your installed argoCD instance namespace
 
