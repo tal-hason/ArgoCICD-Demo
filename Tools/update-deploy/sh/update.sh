@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Exit script immediately if a command exits with a non-zero status
-set -e
-
 # Set Git User Name & E-mail
 git config --global user.email "$EMAIL"
 git config --global user.name "$NAME"
