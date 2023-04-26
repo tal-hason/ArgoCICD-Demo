@@ -1,6 +1,7 @@
 # ArgoCICD-Demo
 
-(https://youtu.be/sFNHS1mdglI)
+[Live Demo](https://youtu.be/sFNHS1mdglI)
+
 
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
