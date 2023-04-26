@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "version 14"
 # Set Git User Name & E-mail
 git config --global user.email "$EMAIL"
