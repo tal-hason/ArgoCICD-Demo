@@ -96,7 +96,7 @@ patchesJSON6902:
     #!/bin/bash
 
     echo 'Update with the new build tag'
-    sed -i 's/newTag:.*/newTag: "${TAG}"/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
+    sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
     
     # Set Git User Nmae & E-mail
     git config --global user.email $EMAIL
