@@ -12,7 +12,7 @@ configMapGenerator:
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: v1.20
+  newTag: v1.21
 
 patchesJSON6902:
 - target:
