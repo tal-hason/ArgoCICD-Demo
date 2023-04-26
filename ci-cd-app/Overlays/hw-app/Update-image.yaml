@@ -54,7 +54,7 @@ spec:
               configMapKeyRef:
                 name: promote
                 key: destination
-        image: quay.io/argocicd/update-deploy:v7
+        image: quay.io/argocicd/update-deploy:v8
         volumeMounts:
         - name: workspace
           mountPath: /workspace
