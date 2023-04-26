@@ -11,8 +11,10 @@ if [[ "$ENV" == "prod" ]]; then
   echo "Update Production Image from Dev"
 
   # Get the current image from Dev and set it as $TAG
-  TAG=$(yq eval '.images[].newTag' "$WORKENV/app/yaml/Overlay/dev/kustomization.yaml")
+  export TAG=$(yq eval '.images[].newTag' "$WORKENV/app/yaml/Overlay/dev/kustomization.yaml")
   
+  echo "dev deployment is --> ${TAG}"
+
   echo "Update production deployment with the dev tag"
   sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
   
