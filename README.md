@@ -96,7 +96,7 @@ patchesJSON6902:
     #!/bin/bash
 
     echo 'Update with the new build tag'
-    sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
+    sed -i 's/newTag:.*/newTag: "${TAG}"/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
     
     # Set Git User Nmae & E-mail
     git config --global user.email $EMAIL
@@ -109,7 +109,7 @@ patchesJSON6902:
     git add $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
     
     echo "Commit New Version"
-    git commit -m '${COMMIT}'
+    git commit -m "${COMMIT}"
     
     echo "Push Update to Git"
     git push https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git
