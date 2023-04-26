@@ -12,7 +12,7 @@ configMapGenerator:
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 #
-# Change destination to promote from dev to prod
+# Change destination to promote from dev to prod.
 #
 - name: promote
   literals:
