@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: quay.io
-data:
-  auth.json: ewogICJhdXRocyI6IHsKICAgICJxdWF5LmlvIjogewogICAgICAiYXV0aCI6ICJZWEpuYjJOcFkyUXJZM0psWVhSMWNtVTZTalV6VWpFMlVsTklSMDQ0V0RsT1RVdFJPRlZLVlU1TldrTkRPVUZKUlVsR1dWbFFNRWcxTmxReU1GYzFNRlpJV1VNek5WZERXalF4VEVjd00wNUxTdz09IiwKICAgICAgImVtYWlsIjogIiIKICAgIH0KICB9Cn0=
-type: Opaque
