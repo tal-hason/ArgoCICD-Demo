@@ -37,7 +37,6 @@ ewogICJhdXRocyI6IHsKICAgICJxdWF5LmlvIjogewogICAgICAiYXV0aCI6ICJZWEpuYjJOcFkyUXJZ
 type: Opaque
 ```
 
-
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
 
 ![CI Application](https://github.com/tal-hason/ArgoCICD-Demo/blob/ad6ff3be3097d24bc31ed0ddced0945fc952640d/pictures/ci-Process.png?raw=true)
