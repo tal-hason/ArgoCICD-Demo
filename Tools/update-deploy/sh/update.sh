@@ -1,7 +1,12 @@
 #!/bin/bash
+echo "Load the latest git hash to TAG env var"
+export TAG=$(cat git_hash)
 
-echo 'Update with the new build tag'
+echo 'Update deployment with the new build tag'
 sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
+
+echo 'Update Condifgmap with the new build tag'
+sed -i 's/TAG=.*/TAG='${TAG}'/' $WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml
 
 # Set Git User Nmae & E-mail
 git config --global user.email $EMAIL
