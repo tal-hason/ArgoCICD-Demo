@@ -10,7 +10,7 @@ resources:
 configMapGenerator:
 - name: ci-cd-details
   envs:
-  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 #
 # Change destination to promote from dev to drod
 #
