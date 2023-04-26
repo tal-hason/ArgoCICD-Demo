@@ -33,7 +33,7 @@ metadata:
   name: quay.io
 data:
   auth.json: >-
-ewogICJhdXRocyI6IHsKICAgICJxdWF5LmlvIjogewogICAgICAiYXV0aCI6ICJZWEpuYjJOcFkyUXJZM0psWVhSMWNtVTZTalV6VWpFMlVsTklSMDQ0V0RsT1RVdFJPRlZLVlU1TldrTkRPVUZKUlVsR1dWbFFNRWcxTmxReU1GYzFNRlpJV1VNek5WZERXalF4VEVjd00wNUxTdz09IiwKICAgICAgImVtYWlsIjogIiIKICAgIH0KICB9Cn0=
+{{ Your dockercfg file | Base64 }}
 type: Opaque
 ```
 
