@@ -29,3 +29,10 @@ patchesJSON6902:
     - op: replace
       path: /spec/replicas
       value: 1
+- target:
+    kind: Route
+    name: argocicd-dev
+  patch: |-
+    - op: replace
+      path: /spec/to/name
+      value: argocicd-dev
