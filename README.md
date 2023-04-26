@@ -1,6 +1,7 @@
 # ArgoCICD-Demo
 
-![Video](https://youtu.be/sFNHS1mdglI)
+[Video](https://youtu.be/sFNHS1mdglI)
+
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
