@@ -24,11 +24,11 @@ spec:
               configMapKeyRef:
                 name: ci-cd-details
                 key: WORKENV
-          - name: TAG
-            valueFrom:
-              configMapKeyRef:
-                name: ci-cd-details
-                key: imagetag
+          # - name: TAG
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: ci-cd-details
+          #       key: imagetag
           - name: NAME
             valueFrom:
               configMapKeyRef:
