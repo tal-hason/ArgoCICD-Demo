@@ -12,12 +12,12 @@ configMapGenerator:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 - name: tag
   literals:
-    - TAG=11ed3a
+    - TAG=38c20f
 
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: 11ed3a
+  newTag: 38c20f
 
 patchesJSON6902:
 - target:
