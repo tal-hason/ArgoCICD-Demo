@@ -29,7 +29,7 @@ generatorOptions:
     argocd.argoproj.io/sync-wave: "0"
 ```
 
-## The Hello-world application also build with kustomized layer and is related to the the same config
+## The Hello-world application also build with kustomized layer and is related to the same config
 
 ![Hello-World-App](https://github.com/tal-hason/ArgoCICD-Demo/blob/assests/pictures/Hello-world-App.png?raw=true)
 
