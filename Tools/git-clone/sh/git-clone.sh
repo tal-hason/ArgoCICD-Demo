@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "version 8"
 echo "Cleaning old files"
 rm -Rfv ${WORKENV}/*
 rm -Rfv ${WORKENV}/.*
