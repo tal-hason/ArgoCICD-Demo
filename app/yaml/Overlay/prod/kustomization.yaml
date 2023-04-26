@@ -4,12 +4,12 @@ kind: Kustomization
 resources:
 - ../../base
 
+nameSuffix: -prod
+
 configMapGenerator:
 - name: ci-cd-details
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
-
-nameSuffix: -dev
 
 images:
 - name: quay.io/argocicd/hello-world
@@ -25,4 +25,4 @@ patchesJSON6902:
   patch: |-
     - op: replace
       path: /spec/replicas
-      value: 1
+      value: 3

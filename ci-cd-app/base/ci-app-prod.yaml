@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world-app
+  name: hello-world-app-dev
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: test
+    namespace: application-dev
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: app/yaml/Overlay/dev
+    path: app/yaml/Overlay/prod
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
     targetRevision: main
   syncPolicy:
