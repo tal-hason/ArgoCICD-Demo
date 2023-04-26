@@ -17,25 +17,6 @@ configMapGenerator:
 - name: promote
   literals:
     - destination=prod
-#
-# Git Clone scripit to inject to Pod
-#
-- name: git-clone
-  files:
-  - https://github.com/tal-hason/ArgoCICD-Demo/raw/main/Tools/git-clone/sh/git-clone.sh
-#
-# build-n-push scripit to inject to Pod
-#
-- name: build-n-push
-  files:
-  - https://github.com/tal-hason/ArgoCICD-Demo/raw/main/Tools/podman-build/sh/podman-b-n-p.sh
-#
-# update-deployscripit to inject to Pod
-#
-- name: update-deploy
-  files:
-  - https://github.com/tal-hason/ArgoCICD-Demo/raw/main/Tools/update-deploy/sh/update.sh
-
 
 generatorOptions:
  disableNameSuffixHash: true
