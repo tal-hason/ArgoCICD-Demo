@@ -3,6 +3,6 @@ git_url='https://github.com/tal-hason/ArgoCICD-Demo.git'
 imagename=quay.io/argocicd/hello-world
 path=app
 WORKENV=/workspace/output
-username=tal-hason"
+username=tal-hason
 email=thason@redhat.com
 commit_message=new app version
