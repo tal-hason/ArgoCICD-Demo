@@ -5,6 +5,7 @@
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
 * Please Fork the Repo and work with your own details *
+
 > To start the CI Application on your ArgoCD Instance run the following command to your installed argoCD instance namespace
 > in order for the update step to succesed, Please create a Secret named "gh-token" with a single Key named "TOKEN" that stores your GitHub PAT(Personal Access Token).
 
@@ -76,7 +77,7 @@ patchesJSON6902:
 
 ## In the CI process there is 3 steps
 
-- Step 1, Git Clone, an Image that pull the Application Git, it runs the following script
+* Step 1, Git Clone, an Image that pull the Application Git, it runs the following script
 
     ```Bash
     #!/bin/bash
@@ -89,7 +90,7 @@ patchesJSON6902:
     ls -l ${WORKENV}
     ```
 
-- Step 2, Build and push the new application image, the new image tag and name are transfered from the config file that is mapped as enviorment varibales, it runs the following script:
+* Step 2, Build and push the new application image, the new image tag and name are transfered from the config file that is mapped as enviorment varibales, it runs the following script:
 
     ```YAML
     #!/bin/bash
@@ -100,7 +101,7 @@ patchesJSON6902:
     podman push ${IMAGE}:${TAG}
     ```
 
-- Step 3, Update the Deployment with the new image tag that we build, it runs the follwoing script:
+* Step 3, Update the Deployment with the new image tag that we build, it runs the follwoing script:
 
     ```YAML
     #!/bin/bash
@@ -124,4 +125,3 @@ patchesJSON6902:
     echo "Push Update to Git"
     git push https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git
     ```
-
