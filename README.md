@@ -2,7 +2,7 @@
 
 [Live Demo](https://youtu.be/sFNHS1mdglI)
 
-In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
+In this repo we have a Project that demonstrate a full CI and CD pipeline that is utilized with only ArgoCD
 
 * Please Fork the Repo and work with your own details *
 
