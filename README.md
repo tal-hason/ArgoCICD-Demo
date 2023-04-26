@@ -1,5 +1,6 @@
 # ArgoCICD-Demo
 
+![Video](https://youtu.be/sFNHS1mdglI)
 In this repo we have a Project that demoenstrait a full CI and CD pipeline that is utilized with only ArgoCD
 
 ## The main Argo Application is a ConfigMapGeneretor with a base with the related apps
@@ -114,3 +115,4 @@ patchesJSON6902:
     echo "Push Update to Git"
     git push https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git
     ```
+
