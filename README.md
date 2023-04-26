@@ -57,18 +57,32 @@ configMapGenerator:
 - name: ci-cd-details
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+#
+# Change destination to promote from dev to drod
+#
+- name: promote
+  literals:
+    - destination=prod
 
 generatorOptions:
  disableNameSuffixHash: true
  annotations:
     argocd.argoproj.io/sync-wave: "0"
+
 ```
+
+#### Now the CI process support image taging from git Hash from the lasted commit when the ConfigMap "promote" Key "destination" equel "dev"
+
+When the destination equal "prod":
+
+* the build and push job skips builidng a new image.
+* the update job get the image tag from the dev depolyment and update the production.
 
 ## The Hello-world application also build with kustomized layer and is related to the same config
 
 ![Hello-World-App](https://github.com/tal-hason/ArgoCICD-Demo/blob/assests/pictures/Hello-world-App.png?raw=true)
 
-### the Hello-world app Kustomization File
+### the Hello-world dev env app Kustomization File
 
 ```YAML
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -77,15 +91,20 @@ kind: Kustomization
 resources:
 - ../../base
 
+nameSuffix: -dev
+
 configMapGenerator:
 - name: ci-cd-details
   envs:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+- name: tag
+  literals:
+    - TAG=ca3001
 
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: v1.20
+  newTag: ca3001
 
 patchesJSON6902:
 - target:
@@ -96,7 +115,57 @@ patchesJSON6902:
   patch: |-
     - op: replace
       path: /spec/replicas
-      value: 2
+      value: 1
+- target:
+    kind: Route
+    name: argocicd-dev
+  patch: |-
+    - op: replace
+      path: /spec/to/name
+      value: argocicd-dev
+```
+
+### the Hello-world prod env app Kustomization File
+
+```YAML
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+
+nameSuffix: -prod
+
+configMapGenerator:
+- name: ci-cd-details
+  envs:
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config
+- name: tag
+  literals:
+    - TAG=ca3001
+
+images:
+- name: quay.io/argocicd/hello-world
+  newName: 'quay.io/argocicd/hello-world'
+  newTag: ca3001
+
+patchesJSON6902:
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: argocicd
+  patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 3
+- target:
+    kind: Route
+    name: argocicd-prod
+  patch: |-
+    - op: replace
+      path: /spec/to/name
+      value: argocicd-prod
 ```
 
 ## In the CI process there is 3 steps
@@ -112,40 +181,75 @@ patchesJSON6902:
     git clone https://${GIT} ${WORKENV}
     echo "Show Folder Content" 
     ls -l ${WORKENV}
+    echo "Get latest Git Log Hash for the new Tag"
+    cd ${WORKENV}
+    git log -1 --format="%h" | cut -c1-6 > ${WORKENV}/git_hash
     ```
 
 * Step 2, Build and push the new application image, the new image tag and name are transfered from the config file that is mapped as enviorment varibales, it runs the following script:
 
-    ```YAML
+    ```bash
     #!/bin/bash
-    echo "Build contianer from  ${WORKENV}/${LOC} with name ${IMAGE}:${TAG}"
-    podman build app/ -t ${IMAGE}:${TAG}
-
-    echo "push image to external registry ${IMAGE}:${TAG}"
-    podman push ${IMAGE}:${TAG}
+    echo "Load the latest git hash to TAG env var"
+    export TAG=$(cat git_hash)
+    
+    if [ "$ENV" = "prod" ]; then
+      echo "Skipping build and push for production environment"
+      exit 0
+    else
+      echo "Building container from ${WORKENV}/app/Dockerfile with name ${IMAGE}:${TAG}"
+      podman build app/ -t "${IMAGE}:${TAG}"
+    
+      echo "Pushing image to external registry ${IMAGE}:${TAG}"
+      podman push "${IMAGE}:${TAG}"
+    fi
     ```
 
 * Step 3, Update the Deployment with the new image tag that we build, it runs the follwoing script:
 
-    ```YAML
+    ```bash
     #!/bin/bash
-
-    echo 'Update with the new build tag'
-    sed -i 's/newTag:.*/newTag: '${TAG}'/' $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
     
-    # Set Git User Nmae & E-mail
-    git config --global user.email $EMAIL
-    git config --global user.name $NAME
+    # Exit script immediately if a command exits with a non-zero status
+    set -e
     
-    # Move to the Git Folder
-    cd $WORKENV
+    # Set Git User Name & E-mail
+    git config --global user.email "$EMAIL"
+    git config --global user.name "$NAME"
     
-    echo 'Add new Change to the Git'
-    git add $WORKENV/app/yaml/Overlay/dev/kustomization.yaml
+    if [[ "$ENV" == "prod" ]]; then
+      echo "Update Production Image from Dev"
     
-    echo "Commit New Version"
-    git commit -m "${COMMIT}"
+      # Get the current image from Dev and set it as $TAG
+      export TAG=$(yq eval '.images[].newTag' "$WORKENV/app/yaml/Overlay/d
+      
+      echo "dev deployment is --> ${TAG}"
     
-    echo "Push Update to Git"
-    git push https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git
+      echo "Update production deployment with the dev tag"
+      sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/k
+      
+      echo "Update ConfigMap with the new build tag"
+      sed -i "s/TAG=.*/TAG=$TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomiz
+    else
+      echo "Load the latest git hash to TAG env var"
+      TAG=$(cat "$WORKENV/git_hash")
+      
+      echo "Update deployment with the new build tag"
+      sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/k
+      
+      echo "Update ConfigMap with the new build tag"
+      sed -i "s/TAG=.*/TAG=$TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomiz
+    fi
+    
+    # Move to the Git folder
+    cd "$WORKENV"
+    
+    echo "Add new change to Git"
+    git add "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+    
+    echo "Commit new version"
+    git commit -m "$COMMIT"
+    
+    echo "Push update to Git"
+    git push "https://$NAME:$TOKEN@github.com/tal-hason/ArgoCICD-Demo.git"
     ```
