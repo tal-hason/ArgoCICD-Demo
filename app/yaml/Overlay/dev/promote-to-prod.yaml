@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "3"
+  name: Promote-to-prod
+spec:
+  template:
+    metadata:
+      name: promote
+    spec:
+     restartPolicy: Never
+     containers:
+     - name: promote
+       image: registry.access.redhat.com/ubi9-minimal:latest
+       workingDir: /workspace/output
+       command: ["/bin/bash", "-c"]
+       args: ['curl ${ARGOCICD_DEV_SERVICE_HOST}:${ARGOCICD_DEV_SERVICE_PORT}/test2 | grep "${TEST2}" || exit 1']
+       env:
+         - name: TEST2
+           valueFrom:
+             configMapKeyRef:
+               name: tests
+               key: test2
+       volumeMounts:
+       - name: workspace
+         mountPath: /workspace/output
+       - name: scripts
+         mountPath: /tmp
+     - name: workspace
+       emptyDir: {}
+     - name: scripts
+       configMap:
+        name: scripts
+  backoffLimit: 1

@@ -18,7 +18,10 @@ configMapGenerator:
   files:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test1
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test2
-
+- name: scripts
+  files:
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/git-clone/sh/git-clone.sh
+  - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/update-deploy/sh/update.sh
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
