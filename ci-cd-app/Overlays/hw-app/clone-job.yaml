@@ -38,4 +38,4 @@ spec:
         - name: workspace
           persistentVolumeClaim:
             claimName: workspace
-
+  backoffLimit: 1

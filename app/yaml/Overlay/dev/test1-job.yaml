@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "1"
+  name: test-1-url
+spec:
+  template:
+    metadata:
+      name: test-url
+    spec:
+     restartPolicy: Never
+     containers:
+     - name: test-url
+       image: registry.access.redhat.com/ubi9-minimal:latest
+       workingDir: /workspace/output
+       command: ["/bin/bash", "-c"]
+       args: ["curl ${RGOCICD_DEV_SERVICE_HOST}:${RGOCICD_DEV_SERVICE_HOST}/test1 | grep ${TEST1} || exit 1"]
+       env:
+         - name: TEST1
+           valueFrom:
+             configMapKeyRef:
+               name: tests
+               key: test1
+  backoffLimit: 1

@@ -54,3 +54,4 @@ spec:
      - name: imagepullsecret
        secret:
          secretName: quay.io
+  backoffLimit: 1
