@@ -13,7 +13,19 @@ app.get('/', function (req, res) {
   console.log(`Someone accessed me! --> from ${clientHostname}`)
 });
 
+app.get('/test1', function (req, res) {
 
+  res.send(`This is Test1, All Good`);
+
+  console.log(`Someone accessed Test1 Path!`)
+});
+
+app.get('/test2', function (req, res) {
+
+  res.send(`This is Test2, All Good`);
+
+  console.log(`Someone accessed Test2 Path!`)
+});
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
