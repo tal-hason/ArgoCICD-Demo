@@ -11,13 +11,13 @@ if [[ "$ENV" == "prod" ]]; then
   # Get the current image from Dev and set it as $TAG
   export TAG=$(yq eval '.images[].newTag' "$WORKENV/app/yaml/Overlay/dev/kustomization.yaml")
   
-  echo "dev deployment is --> ${TAG}"
+  echo "dev deployment is --> "ver_${TAG}""
 
   echo "Update production deployment with the dev tag"
-  sed -i "s/newTag:.*/newTag: "$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/newTag:.*/newTag: "ver_${TAG}"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
   
   echo "Update ConfigMap with the new build tag"
-  sed -i "s/TAG=.*/TAG="$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/TAG=.*/TAG="ver_${TAG}"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
 
   echo "Cleanup"
   rm -f $WORKENV/git_hash
@@ -25,13 +25,13 @@ else
   echo "Load the latest git hash to TAG env var"
   TAG=$(cat "$WORKENV/git_hash")
 
-  echo "dev deployment is --> ${TAG}"
+  echo "dev deployment is --> "ver_${TAG}""
 
   echo "Update deployment with the new build tag"
-  sed -i "s/newTag:.*/newTag: "$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/newTag:.*/newTag: "ver_${TAG}"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
   
   echo "Update ConfigMap with the new build tag"
-  sed -i "s/TAG=.*/TAG="$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/TAG=.*/TAG="ver_${TAG}"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
 
   echo "Cleanup"
   rm -f $WORKENV/git_hash

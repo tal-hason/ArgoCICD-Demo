@@ -8,9 +8,9 @@ if [ "$ENV" = "prod" ]; then
   echo "Skipping build and push for production environment"
   exit 0
 else
-  echo "Building container from ${WORKENV}/app/Dockerfile with name ${IMAGE}:${TAG}"
-  podman build app/ -t "${IMAGE}:${TAG}"
+  echo "Building container from ${WORKENV}/app/Dockerfile with name ${IMAGE}:ver_${TAG}"
+  podman build app/ -t "${IMAGE}:ver_${TAG}"
 
-  echo "Pushing image to external registry ${IMAGE}:${TAG}"
-  podman push "${IMAGE}:${TAG}"
+  echo "Pushing image to external registry ${IMAGE}:ver_${TAG}"
+  podman push "${IMAGE}:ver_${TAG}"
 fi
