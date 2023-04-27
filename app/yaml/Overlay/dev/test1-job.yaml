@@ -17,7 +17,7 @@ spec:
        image: registry.access.redhat.com/ubi9-minimal:latest
        workingDir: /workspace/output
        command: ["/bin/bash", "-c"]
-       args: ["curl ${RGOCICD_DEV_SERVICE_HOST}:${RGOCICD_DEV_SERVICE_HOST}/test1 | grep ${TEST1} || exit 1"]
+       args: ["curl ${ARGOCICD_DEV_SERVICE_HOST}:${ARGOCICD_DEV_SERVICE_HOST}/test1 | grep ${TEST1} || exit 1"]
        env:
          - name: TEST1
            valueFrom:
