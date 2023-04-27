@@ -14,10 +14,10 @@ if [[ "$ENV" == "prod" ]]; then
   echo "dev deployment is --> ${TAG}"
 
   echo "Update production deployment with the dev tag"
-  sed -i "s/newTag:.*/newTag: $TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/newTag:.*/newTag: "$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
   
   echo "Update ConfigMap with the new build tag"
-  sed -i "s/TAG=.*/TAG=$TAG/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
+  sed -i "s/TAG=.*/TAG="$TAG"/" "$WORKENV/app/yaml/Overlay/$ENV/kustomization.yaml"
 
   echo "Cleanup"
   rm -f $WORKENV/git_hash
