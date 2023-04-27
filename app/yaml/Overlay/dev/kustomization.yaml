@@ -13,15 +13,12 @@ configMapGenerator:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 - name: tag
   literals:
-<<<<<<< HEAD
     - TAG=ver_668f5e
-=======
     - TAG=ver_6e3b19
 - name: tests
   files:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test1
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test2
->>>>>>> dd6775d (added tests for dev env)
 
 images:
 - name: quay.io/argocicd/hello-world
