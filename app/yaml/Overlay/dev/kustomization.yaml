@@ -14,7 +14,6 @@ configMapGenerator:
 - name: tag
   literals:
     - TAG=ver_668f5e
-    - TAG=ver_6e3b19
 - name: tests
   files:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test1
