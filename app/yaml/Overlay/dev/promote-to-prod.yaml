@@ -14,7 +14,7 @@ spec:
      restartPolicy: Never
      containers:
      - name: promote
-       image: registry.access.redhat.com/ubi9-minimal:latest
+       image: quay.io/argocicd/update-deploy:ne15
        workingDir: /workspace/output
        command: ["/bin/bash", "-c"]
        args: ['curl ${ARGOCICD_DEV_SERVICE_HOST}:${ARGOCICD_DEV_SERVICE_PORT}/test2 | grep "${TEST2}" || exit 1']
@@ -29,6 +29,7 @@ spec:
          mountPath: /workspace/output
        - name: scripts
          mountPath: /tmp
+    volumes:
      - name: workspace
        emptyDir: {}
      - name: scripts
