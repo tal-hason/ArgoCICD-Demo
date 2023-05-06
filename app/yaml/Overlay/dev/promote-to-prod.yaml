@@ -17,7 +17,10 @@ spec:
        image: quay.io/argocicd/update-deploy:ne15
        workingDir: /workspace/output
        command: ["/bin/bash", "-c"]
-       args: ['curl ${ARGOCICD_DEV_SERVICE_HOST}:${ARGOCICD_DEV_SERVICE_PORT}/test2 | grep "${TEST2}" || exit 1']
+       args:
+       - /tmp/git-clone.sh
+       - sleep 1
+       - /tmp/update.sh
        env:
          - name: TEST2
            valueFrom:

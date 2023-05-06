@@ -5,6 +5,7 @@ resources:
 - ../../base
 - test1-job.yaml
 - test2-job.yaml
+
 nameSuffix: -dev
 
 configMapGenerator:
