@@ -5,7 +5,7 @@ echo "version 14"
 git config --global user.email "$EMAIL"
 git config --global user.name "$NAME"
 
-if [[ "$ENV" == "prod" ]]; then
+if [[ "$ENV" != "dev" ]]; then
   echo "Update Production Image from Dev"
 
   # Get the current image from Dev and set it as $TAG

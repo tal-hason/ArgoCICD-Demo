@@ -4,7 +4,7 @@ echo "version 5"
 echo "Load the latest git hash to TAG env var"
 export TAG=$(cat git_hash)
 
-if [ "$ENV" = "prod" ]; then
+if [ "$ENV" != "dev" ]; then
   echo "Skipping build and push for production environment"
   exit 0
 else
