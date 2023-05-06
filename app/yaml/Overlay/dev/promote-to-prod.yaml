@@ -11,6 +11,7 @@ spec:
     metadata:
       name: promote
     spec:
+     serviceAccount: builder
      restartPolicy: Never
      containers:
      - name: promote
