@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
     argocd.argoproj.io/sync-wave: "3"
-  name: Promote-to-prod
+  name: promote-to-prod
 spec:
   template:
     metadata:
