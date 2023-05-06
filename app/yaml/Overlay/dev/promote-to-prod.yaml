@@ -32,10 +32,10 @@ spec:
          mountPath: /workspace/output
        - name: scripts
          mountPath: /tmp
-    volumes:
-     - name: workspace
-       emptyDir: {}
-     - name: scripts
-       configMap:
-        name: scripts
+     volumes:
+      - name: workspace
+        emptyDir: {}
+      - name: scripts
+        configMap:
+         name: scripts
   backoffLimit: 1
