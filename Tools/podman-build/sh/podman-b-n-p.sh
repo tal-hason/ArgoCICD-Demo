@@ -5,7 +5,7 @@ echo "Load the latest git hash to TAG env var"
 export TAG=$(cat git_hash)
 
 if [ "$ENV" != "dev" ]; then
-  echo "Skipping build and push for production environment"
+  echo "Skipping build and push for ${ENV} environment"
   exit 0
 else
   echo "Building container from ${WORKENV}/app/Dockerfile with name ${IMAGE}:ver_${TAG}"
