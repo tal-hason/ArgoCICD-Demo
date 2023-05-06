@@ -1,3 +1,4 @@
 Tools/podman-build/quayio.yaml
 Tools/update-deploy/gh-token.yaml
 ci-cd-app/Overlays/def/quay-io.yaml
+app/src/node_modules

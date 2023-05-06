@@ -2,7 +2,16 @@ var image = process.env.IMAGE
 var tag = process.env.TAG
 var host = process.env.HOSTNAME
 var express = require('express');
+const Prometheus = require('prom-client');
+const register = new Prometheus.Registry();
+
 app = express();
+
+register.setDefaultLabels({
+  app: 'hello-world Nodejs application'
+})
+Prometheus.collectDefaultMetrics({register})
+
 
 app.get('/', function (req, res) {
 
@@ -25,6 +34,13 @@ app.get('/test2', function (req, res) {
   res.send(`This is Test2, All Good`);
 
   console.log(`Someone accessed Test2 Path!`)
+});
+
+app.get('/metrics', function(req, res)
+{
+    res.setHeader('Content-Type',register.contentType)
+
+    register.metrics().then(data => res.status(200).send(data))
 });
 
 app.listen(8080, function () {
