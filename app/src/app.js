@@ -13,6 +13,14 @@ register.setDefaultLabels({
 Prometheus.collectDefaultMetrics({register})
 
 
+const http_request_counter = new Prometheus.Counter({
+  name: 'myapp_http_request_count',
+  help: 'Count of HTTP requests made to my app',
+  labelNames: ['method', 'route', 'statusCode'],
+});
+register.registerMetric(http_request_counter);
+
+
 app.get('/', function (req, res) {
 
   var clientHostname = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -42,6 +50,14 @@ app.get('/metrics', function(req, res)
 
     register.metrics().then(data => res.status(200).send(data))
 });
+
+app.use(function(req, res, next)
+{
+    // Increment the HTTP request counter
+    http_request_counter.labels({method: req.method, route: req.originalUrl, statusCode: res.statusCode}).inc();
+
+    next();
+}
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
