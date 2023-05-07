@@ -57,7 +57,7 @@ app.use(function(req, res, next)
     http_request_counter.labels({method: req.method, route: req.originalUrl, statusCode: res.statusCode}).inc();
 
     next();
-}
+});
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
