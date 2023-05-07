@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 
   var clientHostname = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-  res.send(`Hello Red Hat!!,New Version, My Image is ${image}:${tag} , the Server is ${host} accessed from ${clientHostname} `);
+  res.send(`Hello TASE!!,New Version, My Image is ${image}:${tag} , the Server is ${host} accessed from ${clientHostname} `);
 
   console.log(`Someone accessed me! --> from ${clientHostname}`)
 });
