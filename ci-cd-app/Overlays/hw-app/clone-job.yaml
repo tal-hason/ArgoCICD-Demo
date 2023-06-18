@@ -24,7 +24,7 @@ spec:
               configMapKeyRef:
                 name: ci-cd-details
                 key: WORKENV
-        image: quay.io/argocicd/git-clone:v8
+        image: quay.io/argocicd/git-clone:v9
         workingDir: /workspace/output
         args:
         - sh
