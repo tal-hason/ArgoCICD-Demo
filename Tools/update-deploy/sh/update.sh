@@ -4,6 +4,8 @@ echo "version 14"
 # Set Git User Name & E-mail
 git config --global user.email "$EMAIL"
 git config --global user.name "$NAME"
+git config --global --add safe.directory /workspace/output
+
 
 if [[ "$ENV" != "dev" ]]; then
   echo "Update Production Image from Dev"
