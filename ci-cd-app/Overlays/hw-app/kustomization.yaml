@@ -16,7 +16,7 @@ configMapGenerator:
 #
 - name: promote
   literals:
-    - destination=prod
+    - destination=-dev
 
 generatorOptions:
  disableNameSuffixHash: false
