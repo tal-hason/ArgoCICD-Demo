@@ -1,6 +1,7 @@
 var image = process.env.IMAGE
 var tag = process.env.TAG
 var host = process.env.HOSTNAME
+var port = process.env.PORT || 8080;
 var express = require('express');
 const Prometheus = require('prom-client');
 const register = new Prometheus.Registry();
@@ -20,6 +21,22 @@ const http_request_counter = new Prometheus.Counter({
 });
 register.registerMetric(http_request_counter);
 
+
+   
+   
+// Health Probe - Application Liveliness
+app.get('/health/liveliness',function(req,res){
+  console.log(`I am Alive`)
+  res.status(200)
+  res.send('Healty')
+});
+    
+// Health Probe - Application Readiness
+app.get('/health/readiness',function(req,res){
+  console.log(`I am Ready`)
+  res.status(200);
+  res.send('Ready');
+  });  
 
 app.get('/', function (req, res) {
 
@@ -59,7 +76,7 @@ app.use(function(req, res, next)
     next();
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}!`);
 });
 
