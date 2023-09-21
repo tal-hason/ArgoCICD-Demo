@@ -5,4 +5,4 @@ resources:
 - ci-app-dev.yaml
 - ci-app-prod.yaml
 - ci-def.yaml
-
+- argoProj.yaml

@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: ci-cd
     server: 'https://kubernetes.default.svc'
-  project: default
+  project: argo-ci-cd
   source:
     path: ci-cd-app/Overlays/def
     repoURL: 'https://github.com/tal-hason/ArgoCICD-Demo.git'
