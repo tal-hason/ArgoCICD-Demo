@@ -14,7 +14,7 @@ configMapGenerator:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tools/config.ini
 - name: tag
   literals:
-    - TAG=ver_626144
+    - TAG=ver_f284dc
 - name: tests
   files:
   - https://raw.githubusercontent.com/tal-hason/ArgoCICD-Demo/main/Tests/test1
@@ -23,7 +23,7 @@ configMapGenerator:
 images:
 - name: quay.io/argocicd/hello-world
   newName: 'quay.io/argocicd/hello-world'
-  newTag: ver_626144
+  newTag: ver_f284dc
 
 patchesJSON6902:
 - target:
