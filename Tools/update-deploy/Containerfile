@@ -12,7 +12,7 @@ RUN mkdir -p /workspace/output && \
 COPY sh/* .
 
 
-RUN dnf install git wget -y && \
+RUN dnf install git wget gzip zip unzip bzip2 -y && \
     wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && chmod a+x /usr/local/bin/yq && \
     dnf clean all && \
     useradd git -m --home-dir /home/git --gid 0 -s /bin/bash --uid 1000 && \
